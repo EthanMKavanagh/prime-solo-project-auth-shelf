@@ -56,6 +56,13 @@ router.delete('/:id', (req, res) => {
  */
 router.put('/:id', (req, res) => {
   // PUT route code here
+  const queryText = `UPDATE "item" SET "description" = $1, "image_url" = $2;`;
+  pool.query(queryText, [req.params.description, req.params.image_url])
+    .then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error completing PUT item query', err);
+      res.sendStatus(500);
+    });
 });
 
 /**
@@ -70,7 +77,13 @@ router.get('/count', (req, res) => {
  * Return a specific item by id
  */
 router.get('/:id', (req, res) => {
-  // GET item route code here
+  let queryString = `SELECT * FROM "item" WHERE "id" = $1;`;
+  pool.query(queryString, [req.params.id]).then(result => {
+    res.send(result.rows);
+  }).catch(err => {
+    console.log('Error in :id GET:', err);
+    res.sendStatus(500);
+  });
 });
 
 module.exports = router;

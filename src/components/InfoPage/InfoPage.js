@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 class InfoPage extends React.Component {
  componentDidMount () {
@@ -45,6 +46,14 @@ class InfoPage extends React.Component {
     });
   }
 
+  editButton = (id) => {
+    this.props.dispatch({
+      type: 'FETCH_INDIVIDUAL_ITEM',
+      payload: id
+    });
+    this.props.history.push(`/info/edit/${id}`)
+  }
+
   render() {
     console.log('this user', this.props.user);
     return (
@@ -79,7 +88,10 @@ class InfoPage extends React.Component {
             { this.props.user.username === undefined ?
                 <>
                 </>:
-                <button onClick={() => this.removeItem(item.id)}>delete this</button>
+                <>
+                  <button onClick={() => this.removeItem(item.id)}>delete this</button>
+                  <button onClick={() => this.editButton(item.id)}>Edit Item</button>
+                </>
             }
           </li>
         )}
@@ -94,5 +106,5 @@ const mapStateToProp = reduxState => ({
   shelf: reduxState.shelf,
   user: reduxState.user,
 });
-export default connect(mapStateToProp)(InfoPage);
+export default connect(mapStateToProp)(withRouter(InfoPage));
 
