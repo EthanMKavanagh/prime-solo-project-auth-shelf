@@ -8,7 +8,6 @@ class InfoPage extends React.Component {
    });
  }
 
-
   state = {
     newItem: {
       description: '',
@@ -38,6 +37,14 @@ class InfoPage extends React.Component {
     });
   }
 
+  removeItem = (id) => {
+    console.log('removeItem hit with id:', id);
+    this.props.dispatch({
+      type: "DELETE_ITEM",
+      payload: id
+    });
+  }
+
   render() {
     return (
       <div>
@@ -62,12 +69,15 @@ class InfoPage extends React.Component {
           <li key={item.id}>
             {item.description}
             <img src={item.image_url} width="50" height="50"/>
+            <button onClick={() => this.removeItem(item.id)}>delete this</button>
           </li>
-          )}
+        )}
       </div>
     )
   }
 }
+
+
 
 const mapStateToProp = reduxState => ({
   shelf: reduxState.shelf

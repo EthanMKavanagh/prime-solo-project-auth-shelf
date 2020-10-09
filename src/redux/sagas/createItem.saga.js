@@ -8,9 +8,9 @@ function* createItem(action) {
         data: action.payload
     });
 
-    // yield put({
-    //     type: 'FETCH_ITEM'
-    // });
+    yield put({
+        type: 'FETCH_SHELF'
+    });
 }
 
 function* createItemSaga() {

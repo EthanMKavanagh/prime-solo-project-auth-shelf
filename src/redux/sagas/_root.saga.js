@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import createItemSaga from './createItem.saga';
+import deleteSaga from './delete.saga';
 import shelfSaga from './shelf.saga'
 
 
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     createItemSaga(),
-    shelfSaga()
+    shelfSaga(),
+    deleteSaga()
   ]);
 }
