@@ -13,7 +13,20 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  // code here
+  const queryString = `INSERT INTO "item" ("description", "image_url", "user_id")
+                      VALUES ($1, $2, $3);`;
+  const queryValues = [
+    req.body.description,
+    req.body.image_url,
+    req.user.id
+  ];
+  pool.query(queryString, queryValues).then(result => {
+    console.log('Item created in POST:', result);
+    res.sendStatus(201);
+  }).catch(err => {
+    console.error('Failed in create Item', err);
+    res.sendStatus(500);
+  });
 });
 
 /**
