@@ -2,6 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 class InfoPage extends React.Component {
+ componentDidMount () {
+   this.props.dispatch({
+     type: 'FETCH_SHELF'
+   });
+ }
+
 
   state = {
     newItem: {
@@ -35,6 +41,7 @@ class InfoPage extends React.Component {
   render() {
     return (
       <div>
+        <p>Info Page</p>
         <input 
           placeholder='Description'
           type='text'
@@ -50,9 +57,20 @@ class InfoPage extends React.Component {
         />
 
         <button onClick={this.addItem}>Add Item</button>
+
+        {this.props.shelf.map(item =>
+          <li key={item.id}>
+            {item.description}
+            <img src={item.image_url} width="50" height="50"/>
+          </li>
+          )}
       </div>
     )
   }
 }
 
-export default connect()(InfoPage);
+const mapStateToProp = reduxState => ({
+  shelf: reduxState.shelf
+});
+export default connect(mapStateToProp)(InfoPage);
+
