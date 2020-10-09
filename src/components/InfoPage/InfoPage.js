@@ -1,27 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
-
-// JT - Commented out function component code
-// const InfoPage = () => (
-//   <div>
-//     <p>
-//       Shelf Page
-//     </p>
-//   </div>
-// );
-
-
-// If you needed to add local state or other things,
-// you can make it a class component like:
-
-
 class InfoPage extends React.Component {
  componentDidMount () {
    this.props.dispatch({
@@ -29,6 +8,34 @@ class InfoPage extends React.Component {
    });
  }
 
+  state = {
+    newItem: {
+      description: '',
+      image_url: ''
+    }
+  }
+
+  handleChangeFor = (event, propertyName) => {
+    this.setState({
+      newItem: {
+        ...this.state.newItem,
+        [propertyName]: event.target.value
+      }
+    });
+  }
+
+  addItem = () => {
+    this.props.dispatch({
+      type: 'CREATE_ITEM',
+      payload: this.state.newItem
+    });
+    this.setState({
+      newItem: {
+        description: '',
+        image_url: ''
+      }
+    });
+  }
 
   removeItem = (id) => {
     console.log('removeItem hit with id:', id);
@@ -42,6 +49,22 @@ class InfoPage extends React.Component {
     return (
       <div>
         <p>Info Page</p>
+        <input 
+          placeholder='Description'
+          type='text'
+          value={this.state.newItem.description}
+          onChange={(event) => this.handleChangeFor(event, 'description')}
+        />
+
+        <input 
+          placeholder='Image URL'
+          type='text'
+          value={this.state.newItem.image_url}
+          onChange={(event) => this.handleChangeFor(event, 'image_url')}
+        />
+
+        <button onClick={this.addItem}>Add Item</button>
+
         {this.props.shelf.map(item =>
           <li key={item.id}>
             {item.description}
@@ -55,9 +78,9 @@ class InfoPage extends React.Component {
 }
 
 
+
 const mapStateToProp = reduxState => ({
   shelf: reduxState.shelf
 });
-
 export default connect(mapStateToProp)(InfoPage);
 

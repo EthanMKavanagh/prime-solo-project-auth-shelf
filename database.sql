@@ -15,9 +15,7 @@ CREATE TABLE "item" (
     "user_id" INT REFERENCES "user"
 );
 
-INSERT INTO "user" ("username", "password")
-VALUES ('Hugh Manatee', '817bubbles'),
-	('Mr. Krabs', 'mefirstdoller55');
+-- CREATE 2 users via regester, then run INSERT INTO "item" query
 
 INSERT INTO "item" ("description", "image_url", "user_id")
 VALUES
