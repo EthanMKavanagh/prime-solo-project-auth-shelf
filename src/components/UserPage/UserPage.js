@@ -16,6 +16,7 @@ class UserPage extends Component {
   }
 }
 
+
 // this allows us to use <App /> in index.js
 const mapStoreToProps = (reduxState) => ({
   user: reduxState.user
