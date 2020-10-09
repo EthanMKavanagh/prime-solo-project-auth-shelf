@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -33,6 +34,12 @@ class InfoPage extends React.Component {
     return (
       <div>
         <p>Info Page</p>
+        {this.props.shelf.map(item =>
+          <li key={item.id}>
+            {item.description}
+            <img src={item.image_url} width="50" height="50"/>
+          </li>
+          )}
       </div>
     )
   }
@@ -43,3 +50,4 @@ const mapStateToProp = reduxState => ({
 });
 
 export default connect(mapStateToProp)(InfoPage);
+
