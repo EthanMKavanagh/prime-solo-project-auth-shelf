@@ -30,11 +30,11 @@ class InfoPage extends React.Component {
  }
 
 
-  removeItem = () => {
-    console.log('removeItem hit.');
+  removeItem = (id) => {
+    console.log('removeItem hit with id:', id);
     this.props.dispatch({
       type: "DELETE_ITEM",
-      //payload: this.props.item.id
+      payload: id
     });
   }
 
@@ -42,13 +42,13 @@ class InfoPage extends React.Component {
     return (
       <div>
         <p>Info Page</p>
-        <button onClick={this.removeItem}>deleteTest</button>
         {this.props.shelf.map(item =>
           <li key={item.id}>
             {item.description}
             <img src={item.image_url} width="50" height="50"/>
+            <button onClick={() => this.removeItem(item.id)}>delete this</button>
           </li>
-          )}
+        )}
       </div>
     )
   }
