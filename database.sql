@@ -19,7 +19,7 @@ CREATE TABLE "item" (
 INSERT INTO "user" ("username", "password")
 VALUES ('Hugh Manatee', '817bubbles'),
 	('Mr. Krabs', 'mefirstdoller55');
-
+	
 
 INSERT INTO "item" ("description", "image_url", "user_id")
 VALUES
@@ -27,3 +27,4 @@ VALUES
 ('Comb', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTmW7zH624FulSFIMH1CL7y-HDcAF2gUQHwFw&usqp=CAU', '1'),
 ('Toys', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRh_UHKZGKcn6-1S307ezSg3hnQ6o7ohdUdhw&usqp=CAU', '2'),
 ('Shoes', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRJXv_pf5CDr2hyxAO25ybxpwOB3Ni_Q1BB5w&usqp=CAU', '2');
+
